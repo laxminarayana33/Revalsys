@@ -1,0 +1,31 @@
+<nav class="navbar">
+  <div class="row">
+    <div class="col s6">
+      <!-- <img src="./images/image001.png" alt="Revalsys"> -->
+    </div>
+    <div class="col s6">
+      <ul class="navlist">
+        <li class="listitem">
+          <!-- <img src="../../app/images/image002.png" alt="others"> -->
+           Home</li>
+        <li class="listitem">Office</li>
+        <li class="listitem">Work</li>
+        <li class="listitem">About US</li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="col s6">
+      <form [formGroup]="registration" (ngSubmit)="register()">
+        <div class="col s12">
+          <label for="employeeid"> Employee ID</label>
+          <input type="text" formControlName="employeeid" placeholder="Enter Employee ID">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<h2>this is demo</h2>
+<router-outlet></router-outlet>
