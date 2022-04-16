@@ -15,15 +15,106 @@
     </div>
   </div>
 </nav>
+
 <div class="container">
   <div class="row">
-    <div class="col s6">
-      <form [formGroup]="registration" (ngSubmit)="register()">
-        <div class="col s12">
-          <label for="employeeid"> Employee ID</label>
-          <input type="text" formControlName="employeeid" placeholder="Enter Employee ID">
+    <div class="col s12 m6 l9">
+      <div class="row">
+        <div style="text-align: center;">
+          <h2 style="color: coral;">Employee Registrion Form</h2>
         </div>
-      </form>
+        <div class="row">
+          <form class=" col s12 employee-form" [formGroup]="registration" (ngSubmit)="register()">
+           <div class="row col s12">
+            <div class="col s6 form-list">
+              <label for="employeeid"> Employee ID: </label>
+              <input class="input-field" type="text" formControlName="employeeid" placeholder="Enter Employee ID">
+            </div>
+          </div>
+          <div class="row col s12">
+            <div class="col s6 form-list">
+              <label for="name"> Employee Name:</label>
+              <input class="input-field" type="text" formControlName="name" placeholder="Enter Employee Name">
+            </div>
+          </div>
+          <div class="row col s12"><div class="col s12 form-list">
+            <label for="email"> Employee Email: </label>
+            <input class="input-field" type="email" formControlName="email" placeholder="Enter Employee E-mail Id">
+          </div>
+        </div>
+        <div class="row col s12"> <div class="col s12 form-list">
+            <label for="designation"> Designation: </label>
+            <input class="input-field" type="text" list="designations" formControlName="designation" placeholder="Select Your Designation"/>
+            <datalist id="designations">
+              <option>CEO</option>
+              <option>HR</option>
+              <option>Team Leader</option>
+              <option>Employee</option>
+            </datalist>
+          </div>
+        </div>
+        <div class="row col s12">
+           <div class="col s12 form-list">
+            <label for="salary"> Salary: </label>
+            <input type="text" class="input-field" formControlName="salary" placeholder="Enter Your Salary">
+          </div>
+        </div>
+        <div class="row col s12">
+          <div class="col s12 form-list">
+            <label for="gender"> Gender: </label>
+            <input type="radio"  formControlName="gender">
+            <label for="male" value="male"> Male</label>
+            <input type="radio">
+            <label for="female" value="female"> Female</label>
+          </div>
+        </div>
+        <div class="row col s12"><div class="col s12 form-list">
+            <label for="phonenumber"> Phone Number: </label>
+            <input class="input-field" type="text" formControlName="phonenumber" placeholder="Enter Your Phone Number">
+          </div>
+        </div>
+        <div class="row col s12"> <div class="col s12 form-list">
+            <label for="qualification"> Employee Qualification: </label>
+            <input class="input-field" type="text" formControlName="qualification" placeholder="Enter Your Higher Qualification">
+          </div>
+        </div>
+            <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+            <button type="button" class="btn btn-primary" (click)="reset()">Reset</button>
+          </form>
+
+          <div class="row" style="text-align: center;">
+            <h3 style="color:darkgoldenrod;">Employee Registraion Details</h3>
+          </div>
+          <div class="row">
+            <div class="col-md-12 mt-4 mb-4">
+              <table class="table">
+                <thead>
+                  <tr class="tablehead">
+                    <th class="tableitem">Employee ID</th>
+                    <th class="tableitem">Employee Name</th>
+                    <th class="tableitem">Email</th>
+                    <th class="tableitem">Salary</th>
+                    <th class="tableitem">Designation</th>
+                    <th class="tableitem">Gender</th>
+                    <th class="tableitem">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of registarData">
+                    <td class="tableitem"><span>{{data.employeeid}}</span></td>
+                    <td class="tableitem"><span>{{data.name}}</span></td>
+                    <td class="tableitem"><span>{{data.email}}</span></td>
+                    <td class="tableitem"><span>{{data.salary}}</span></td>
+                    <td class="tableitem"><span>{{data.designation}}</span></td>
+                    <td class="tableitem"><span>{{data.gender}}</span></td>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

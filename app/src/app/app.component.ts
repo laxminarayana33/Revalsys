@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -9,17 +9,32 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class AppComponent {
   title = 'app';
 registration!:FormGroup;
+registarData:  any
 
+constructor( private fb: FormBuilder){
 
-constructor(
-  private fb: FormBuilder
-){}
-// inIt(){
-//   this.fb =
-// }
-
+  this.registration = this.fb.group({
+    employeeid:['', Validators.required],
+    name:['', Validators.required],
+    email:['', Validators.required],
+    salary:['', Validators.required],
+    phonenumber:['', Validators.required],
+    qualification:['', Validators.required],
+    designation:['', Validators.required],
+    gender:['', Validators.required],
+  })
+  this.registarData=[];
+}
  register(){
 
  }
+ onSubmit(){
+   this.registarData.push(this.registration.value);
+   this.registration.reset();
+  console.log('')
+ }
+reset(){
+  this.registration.reset();
+}
 
 }
