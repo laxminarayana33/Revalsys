@@ -20,21 +20,21 @@ constructor( private fb: FormBuilder){
   this.registration = this.fb.group({
     employeeid:['', Validators.required],
     name:['', Validators.required],
-    email:['', Validators.required],
+    email:['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@gmail.com" )]],
     salary:['', Validators.required],
     phonenumber:['', Validators.required],
     qualification:['', Validators.required],
     designation:['', Validators.required],
+    language:['', Validators.required],
     gender:['', Validators.required],
   })
-  var data=localStorage.getItem("data");
+  var data:any=localStorage.getItem("data");
   console.log(data);
   if(data){
     this.registarData=JSON.parse(data);
   }else{
     this.registarData=[];
   }
- 
 }
  register(){
    (  err: { error: { msg: { message: string; }[]; message: string; }; })=>{
@@ -42,32 +42,16 @@ constructor( private fb: FormBuilder){
     console.log(err);
   }
  }
-
  onSubmit(){
-  if(this.isedit){
-    
-  }
    this.registarData.push(this.registration.value);
    this.registration.reset();
    localStorage.setItem("data",JSON.stringify(this.registarData));
    this.display();
    this.isedit=false;
-  // var registarData ={'employeeid':'', 'name':'', 'email': '', 'salary':''}
-  // localStorage.setItem('getData', JSON.stringify(this.registarData.value));
-  // let data = JSON.parse(localStorage.getItem('getData')||'');
-  // console.log(data)
-  // var getData = localStorage.getItem('registarData')
-  // this.getData = JSON.parse(localStorage.getItem('getData')||'{}');
-  // console.log('getData:', JSON.parse(localStorage.getItem('getData') ||'{}'));
-  // localStorage.setItem('data', JSON.stringify(registarData))
-  // const registarData = JSON.parse(localStorage.getItem('registarData'));
-  // console.log('')
  }
-
  display(){
    return localStorage.getItem('registration')
  }
-
 reset(){
   this.registration.reset();
 }
@@ -81,7 +65,6 @@ edit(editid:any){
         this.registarData.splice(index, 1);
         localStorage.setItem("data",JSON.stringify(this.registarData));
       }
-
     }
   });
   // this.registarData.edit();

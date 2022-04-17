@@ -1,17 +1,23 @@
 <nav class="navbar">
   <div class="row">
-    <div class="col s6">
-      <!-- <img src="./images/image001.png" alt="Revalsys"> -->
-    </div>
-    <div class="col s6">
-      <ul class="navlist">
-        <li class="listitem">
-          <!-- <img src="../../app/images/image002.png" alt="others"> -->
-           Home</li>
-        <li class="listitem">Office</li>
-        <li class="listitem">Work</li>
-        <li class="listitem">About US</li>
+    <div class="col">
+      <div class="logo-img">
+        <a href="#">
+          <img class="img-fluid" src="assets/images/image001.png" alt="">
+      </a>
+      <ul class="list">
+        <span> <img class="img-list" src="assets/images/image002.png" alt="others"></span>
+        <li class="listitem">Facebook</li>
+        <span> <img class="img-list" src="assets/images/image003.png" alt="others"></span>
+        <li class="listitem">Twitter</li>
+        <span> <img class="img-list" src="assets/images/image004.png" alt="others"></span>
+        <li class="listitem">Linkedin</li>
+        <span> <img class="img-list" src="assets/images/image007.png" alt="others"></span>
+        <li class="listitem">Blogs</li>
+        <span> <img class="img-list" src="assets/images/image008.png" alt="others"></span>
+        <li class="listitem">Address</li>
       </ul>
+      </div>
     </div>
   </div>
 </nav>
@@ -42,7 +48,7 @@
           <div class="row col s12"><div class="col s12 form-list required">
             <label  class="control-label" for="email"> Employee Email: </label>
             <input class="input-field" type="email" formControlName="email" placeholder="Enter Employee E-mail Id">
-            <span class="error" *ngIf="!registration.controls['email'].valid && registration.controls['email'].touched">Email is required</span>
+            <span class="error" *ngIf="!registration.controls['email'].valid && registration.controls['email'].touched">Email is required (e.g email@gmail.com)</span>
           </div>
         </div>
         <div class="row col s12"> <div class="col s12 form-list">
@@ -60,7 +66,7 @@
         <div class="row col s12">
            <div class="col s12 form-list required">
             <label  class="control-label" for="salary"> Salary: </label>
-            <input type="text" step="0.01" min="0" class="input-field" formControlName="salary" placeholder="Enter Your Salary">
+            <input type="number" step="1" class="input-field" formControlName="salary" placeholder="Enter Your Salary">
             <span class="error" *ngIf="!registration.controls['salary'].valid && registration.controls['salary'].touched">Salary is required</span>
           </div>
         </div>
@@ -87,7 +93,18 @@
             <span class="error" *ngIf="!registration.controls['qualification'].valid && registration.controls['qualification'].touched">Qualification is required</span>
           </div>
         </div>
-            <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+        <div class="row col s12">
+          <div class="col s12 form-list">
+            <label  class="control-label" for="language"> Languages Known : </label>
+            <input type="checkbox" name="language" id="language" value="English" formControlName="language">
+            <label for="language"> English</label>
+            <input type="checkbox" name="language" id="language" value="Telugu" formControlName="language">
+            <label for="language"> Telugu</label>
+            <input type="checkbox" name="language" id="language" value="Hindi" formControlName="language">
+            <label for="language"> Hindi</label>
+          </div>
+        </div>
+            <button type="button" class="btn btn-primary" (click)="onSubmit()">{{isedit?"Update":"Submit"}}</button>
             <button type="button" class="btn btn-primary" (click)="reset()">Reset</button>
             <div class="progress" *ngIf="showSpinner">
               <div class="indeterminate"></div></div>
@@ -114,7 +131,7 @@
                     <td class="tableitem"><span>{{data.employeeid}}</span></td>
                     <td class="tableitem"><span>{{data.name}}</span></td>
                     <td class="tableitem"><span>{{data.email}}</span></td>
-                    <td class="tableitem"><span>{{data.salary}}</span></td>
+                    <td class="tableitem"><span>${{data.salary}}.00</span></td>
                     <td class="tableitem"><span>{{data.designation}}</span></td>
                     <td class="tableitem"><span>{{data.gender}}</span></td>
                     <td><button type="button" class="btn btn-primary" (click)="edit(data.employeeid)">Edit</button>
