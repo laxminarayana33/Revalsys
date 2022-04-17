@@ -9,10 +9,11 @@ import { EmailValidator, FormBuilder, FormGroup, MinLengthValidator, Validators 
 export class AppComponent {
   title = 'app';
   registration!:FormGroup;
-  registarData:  any;
+  registarData:  Array<any>;
   errorMessage!: string;
   showSpinner = false;
   getData: any;
+  isedit:boolean=false;
 
 constructor( private fb: FormBuilder){
 
@@ -26,7 +27,14 @@ constructor( private fb: FormBuilder){
     designation:['', Validators.required],
     gender:['', Validators.required],
   })
-  this.registarData=[];
+  var data=localStorage.getItem("data");
+  console.log(data);
+  if(data){
+    this.registarData=JSON.parse(data);
+  }else{
+    this.registarData=[];
+  }
+ 
 }
  register(){
    (  err: { error: { msg: { message: string; }[]; message: string; }; })=>{
@@ -36,11 +44,14 @@ constructor( private fb: FormBuilder){
  }
 
  onSubmit(){
-
+  if(this.isedit){
+    
+  }
    this.registarData.push(this.registration.value);
    this.registration.reset();
-   localStorage.setItem("data",JSON.stringify(this.registration.value));
+   localStorage.setItem("data",JSON.stringify(this.registarData));
    this.display();
+   this.isedit=false;
   // var registarData ={'employeeid':'', 'name':'', 'email': '', 'salary':''}
   // localStorage.setItem('getData', JSON.stringify(this.registarData.value));
   // let data = JSON.parse(localStorage.getItem('getData')||'');
@@ -60,10 +71,32 @@ constructor( private fb: FormBuilder){
 reset(){
   this.registration.reset();
 }
-edit(){
-  this.registarData.edit();
+edit(editid:any){
+  this.registarData.forEach(element => {
+    if(element.employeeid===editid){
+      this.registration.setValue(element);
+      this.isedit=true;
+      var index = this.registarData.indexOf(element);
+      if (index !== -1) {
+        this.registarData.splice(index, 1);
+        localStorage.setItem("data",JSON.stringify(this.registarData));
+      }
+
+    }
+  });
+  // this.registarData.edit();
 }
-remove(){
-  this.registarData.remove();
+remove(deleteid:any){
+  // this.registarData.remove();
+  alert("are you sure ?");
+  this.registarData.forEach(element => {
+    if(element.employeeid===deleteid){
+      var index = this.registarData.indexOf(element);
+      if (index !== -1) {
+        this.registarData.splice(index, 1);
+        localStorage.setItem("data",JSON.stringify(this.registarData));
+      }
+    }
+  });
 }
 }
