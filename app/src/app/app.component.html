@@ -117,8 +117,8 @@
                     <td class="tableitem"><span>{{data.salary}}</span></td>
                     <td class="tableitem"><span>{{data.designation}}</span></td>
                     <td class="tableitem"><span>{{data.gender}}</span></td>
-                    <td><button type="button" class="btn btn-primary" routerLink="/edit">Edit</button>
-                      <button type="button" class="btn btn-primary" (click)="remove()">Delete</button>
+                    <td><button type="button" class="btn btn-primary" (click)="edit(data.employeeid)">Edit</button>
+                      <button type="button" class="btn btn-primary" (click)="remove(data.employeeid)">Delete</button>
                     </td>
                   </tr>
                 </tbody>
