@@ -12,6 +12,7 @@ export class AppComponent {
   registarData:  any;
   errorMessage!: string;
   showSpinner = false;
+  getData: any;
 
 constructor( private fb: FormBuilder){
 
@@ -35,10 +36,27 @@ constructor( private fb: FormBuilder){
  }
 
  onSubmit(){
+
    this.registarData.push(this.registration.value);
    this.registration.reset();
+   localStorage.setItem("data",JSON.stringify(this.registration.value));
+   this.display();
+  // var registarData ={'employeeid':'', 'name':'', 'email': '', 'salary':''}
+  // localStorage.setItem('getData', JSON.stringify(this.registarData.value));
+  // let data = JSON.parse(localStorage.getItem('getData')||'');
+  // console.log(data)
+  // var getData = localStorage.getItem('registarData')
+  // this.getData = JSON.parse(localStorage.getItem('getData')||'{}');
+  // console.log('getData:', JSON.parse(localStorage.getItem('getData') ||'{}'));
+  // localStorage.setItem('data', JSON.stringify(registarData))
+  // const registarData = JSON.parse(localStorage.getItem('registarData'));
   // console.log('')
  }
+
+ display(){
+   return localStorage.getItem('registration')
+ }
+
 reset(){
   this.registration.reset();
 }
