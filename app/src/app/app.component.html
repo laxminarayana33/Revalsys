@@ -21,67 +21,77 @@
     <div class="col s12 m6 l9">
       <div class="row">
         <div style="text-align: center;">
-          <h2 style="color: coral;">Employee Registrion Form</h2>
+          <h1 style="color: coral;">Employee Registrion Form</h1>
         </div>
         <div class="row">
           <form class=" col s12 employee-form" [formGroup]="registration" (ngSubmit)="register()">
            <div class="row col s12">
-            <div class="col s6 form-list">
+            <div class="col s6 form-list" >
               <label for="employeeid"> Employee ID: </label>
               <input class="input-field" type="text" formControlName="employeeid" placeholder="Enter Employee ID">
+              <span class="error" *ngIf="!registration.controls['employeeid'].valid && registration.controls['employeeid'].touched">Employee Id is required</span>
             </div>
           </div>
           <div class="row col s12">
-            <div class="col s6 form-list">
-              <label for="name"> Employee Name:</label>
-              <input class="input-field" type="text" formControlName="name" placeholder="Enter Employee Name">
+            <div class="col s6 form-list required">
+              <label   class="control-label" for="name"> Employee Name:</label>
+              <input class="input-field" type="text" formControlName="name" placeholder="Enter Employee Name" required>
+              <span class="error" *ngIf="!registration.controls['name'].valid && registration.controls['name'].touched">Name is required</span>
             </div>
           </div>
-          <div class="row col s12"><div class="col s12 form-list">
-            <label for="email"> Employee Email: </label>
+          <div class="row col s12"><div class="col s12 form-list required">
+            <label  class="control-label" for="email"> Employee Email: </label>
             <input class="input-field" type="email" formControlName="email" placeholder="Enter Employee E-mail Id">
+            <span class="error" *ngIf="!registration.controls['email'].valid && registration.controls['email'].touched">Email is required</span>
           </div>
         </div>
         <div class="row col s12"> <div class="col s12 form-list">
             <label for="designation"> Designation: </label>
             <input class="input-field" type="text" list="designations" formControlName="designation" placeholder="Select Your Designation"/>
             <datalist id="designations">
-              <option>CEO</option>
-              <option>HR</option>
-              <option>Team Leader</option>
-              <option>Employee</option>
+              <option>Manager</option>
+              <option>Software Developer</option>
+              <option>Software Testers</option>
+              <option>Admin</option>
             </datalist>
+            <span class="error" *ngIf="!registration.controls['designation'].valid && registration.controls['designation'].touched">Designation is required</span>
           </div>
         </div>
         <div class="row col s12">
-           <div class="col s12 form-list">
-            <label for="salary"> Salary: </label>
-            <input type="text" class="input-field" formControlName="salary" placeholder="Enter Your Salary">
+           <div class="col s12 form-list required">
+            <label  class="control-label" for="salary"> Salary: </label>
+            <input type="text" step="0.01" min="0" class="input-field" formControlName="salary" placeholder="Enter Your Salary">
+            <span class="error" *ngIf="!registration.controls['salary'].valid && registration.controls['salary'].touched">Salary is required</span>
           </div>
         </div>
         <div class="row col s12">
-          <div class="col s12 form-list">
-            <label for="gender"> Gender: </label>
-            <input type="radio"  formControlName="gender">
-            <label for="male" value="male"> Male</label>
-            <input type="radio">
-            <label for="female" value="female"> Female</label>
+          <div class="col s12 form-list required">
+            <label  class="control-label" for="gender"> Gender: </label>
+            <input type="radio" name="gender" id="gender" value="Male" checked formControlName="gender">
+            <label for="gender"> Male</label>
+            <input type="radio" name="gender" id="gender" value="Female" checked formControlName="gender">
+            <label for="gender"> Female</label>
+            <input type="radio" name="gender" id="gender" value="Transgender" checked formControlName="gender">
+            <label for="gender"> Transgender</label>
           </div>
         </div>
-        <div class="row col s12"><div class="col s12 form-list">
-            <label for="phonenumber"> Phone Number: </label>
-            <input class="input-field" type="text" formControlName="phonenumber" placeholder="Enter Your Phone Number">
+        <div class="row col s12"><div class="col s12 form-list required">
+            <label  class="control-label" for="phonenumber"> Phone Number: </label>
+            <input class="input-field" pattern="[6789][0-9]{9}" type="text" formControlName="phonenumber" placeholder="Enter Your Phone Number">
+            <span class="error" *ngIf="!registration.controls['phonenumber'].valid && registration.controls['phonenumber'].touched">Phone Number is required</span>
           </div>
         </div>
         <div class="row col s12"> <div class="col s12 form-list">
             <label for="qualification"> Employee Qualification: </label>
             <input class="input-field" type="text" formControlName="qualification" placeholder="Enter Your Higher Qualification">
+            <span class="error" *ngIf="!registration.controls['qualification'].valid && registration.controls['qualification'].touched">Qualification is required</span>
           </div>
         </div>
             <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>
             <button type="button" class="btn btn-primary" (click)="reset()">Reset</button>
-          </form>
-
+            <div class="progress" *ngIf="showSpinner">
+              <div class="indeterminate"></div></div>
+      </form>
           <div class="row" style="text-align: center;">
             <h3 style="color:darkgoldenrod;">Employee Registraion Details</h3>
           </div>
@@ -107,7 +117,9 @@
                     <td class="tableitem"><span>{{data.salary}}</span></td>
                     <td class="tableitem"><span>{{data.designation}}</span></td>
                     <td class="tableitem"><span>{{data.gender}}</span></td>
-
+                    <td><button type="button" class="btn btn-primary" routerLink="/edit">Edit</button>
+                      <button type="button" class="btn btn-primary" (click)="remove()">Delete</button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -118,5 +130,4 @@
     </div>
   </div>
 </div>
-<h2>this is demo</h2>
 <router-outlet></router-outlet>

@@ -14,11 +14,15 @@
 }
 .employee-form{
   padding: 8px;
-  margin-left: 300px;
+  margin-left: 500px;
 }
-.form-list{
+.form-list {
   /* margin: 8px; */
   display: inline;
+}
+.required .control-label::after{
+  content: "*";
+  color:red;
 }
 .input-field{
   margin: 10px;
@@ -26,9 +30,9 @@
   width: 30%;
   display: flex;
 }
-.table{
+.table, td, th{
   border: 2px solid;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 .tablehead{
   margin: 10px;
@@ -40,4 +44,12 @@
   text-align: center;
   padding: 10px;
   width: 10%;
+}
+.btn{
+  padding: 5px;
+  margin: 10px;
+  background-color: aqua;
+}
+.error{
+  color: red;
 }

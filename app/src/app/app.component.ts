@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EmailValidator, FormBuilder, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +8,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AppComponent {
   title = 'app';
-registration!:FormGroup;
-registarData:  any
+  registration!:FormGroup;
+  registarData:  any;
+  errorMessage!: string;
+  showSpinner = false;
 
 constructor( private fb: FormBuilder){
 
@@ -26,15 +28,24 @@ constructor( private fb: FormBuilder){
   this.registarData=[];
 }
  register(){
-
+   (  err: { error: { msg: { message: string; }[]; message: string; }; })=>{
+    this.showSpinner= false;
+    console.log(err);
+  }
  }
+
  onSubmit(){
    this.registarData.push(this.registration.value);
    this.registration.reset();
-  console.log('')
+  // console.log('')
  }
 reset(){
   this.registration.reset();
 }
-
+edit(){
+  this.registarData.edit();
+}
+remove(){
+  this.registarData.remove();
+}
 }
