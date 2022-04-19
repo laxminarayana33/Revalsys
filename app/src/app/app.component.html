@@ -104,7 +104,7 @@
             <label for="language"> Hindi</label>
           </div>
         </div>
-            <button type="button" class="btn btn-primary" (click)="onSubmit()">{{isedit?"Update":"Submit"}}</button>
+            <button type="button" class="btn btn-primary" (click)="onSubmit()" [disabled]="!registration.valid">{{isedit?"Update":"Submit"}}</button>
             <button type="button" class="btn btn-primary" (click)="reset()">Reset</button>
             <div class="progress" *ngIf="showSpinner">
               <div class="indeterminate"></div></div>
